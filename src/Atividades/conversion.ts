@@ -1,7 +1,8 @@
 const numero:string = '10'
 
-console.log(typeof Number(numero))
+console.log(`O numero é ${numero} e seu tipo é ${typeof Number(numero)}`)
 
+ export{}
 // Ou
 // const conversao: number = Number(numero)
 
