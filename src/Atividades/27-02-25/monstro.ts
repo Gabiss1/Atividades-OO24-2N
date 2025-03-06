@@ -14,6 +14,22 @@ export class Monstros{
     getMonstro():void{
         console.log(`Esse monstro é o ${this.nome}, ele tem ${this.vida} de vida, seu poder de explosão é de ${this.poderDeExplosao} pontos e tem um alcance de ${this.alcanceDeExplosao} blocos`)
     }
+
+    getNome():string{
+        return this.nome
+    }
+
+    getVida():number{
+        return this.vida
+    }
+
+    getPoderExplosao():number{
+        return this.poderDeExplosao
+    }
+
+    getAlcanceExplosao():number{
+        return this.alcanceDeExplosao
+    }
 }
 
 const monstro1 = new Monstros()

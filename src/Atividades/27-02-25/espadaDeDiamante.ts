@@ -26,6 +26,18 @@ export class Espadas{
     exibirEspada():void{
         console.log(`Esta é a ${this.nome}, ela tem ${this.dano} pontos de dano e durabilidade de ${this.durabilidade} pontos.`)
     }
+
+    getNome():string{
+        return this.nome
+    }
+
+    getDano():number{
+        return this.dano
+    }
+
+    getDurabilidade():number{
+        return this.durabilidade
+    }
 }
 
 const novaEspada = new Espadas()
@@ -33,5 +45,5 @@ novaEspada.setAtributos('Espada de Diamante', 30, 50)
 const novaEspada1 = new Espadas()
 novaEspada1.setAtributos('Espada de Ferro', 22, 40)
 
-novaEspada.exibirEspada()
-novaEspada1.exibirEspada()
+// novaEspada.exibirEspada()
+// novaEspada1.exibirEspada()
