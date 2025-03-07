@@ -1,3 +1,59 @@
+export class Monster{
+    monsterName:string
+    monsterHealth:number
+    monsterStrength:number
+    monsterSkill: Skills
+    
+    // {
+    //     name:string,
+    //     damage:number,
+    //     effect:string
+    // }
+
+    setAtributes(name:string, health:number, strength:number):void{
+        this.monsterName = name
+        this.monsterHealth = health
+        this.monsterStrength = strength
+    }
+
+    // setSkill(name:string, damage:number, effect:string):void{
+    //     this.monsterSKill.name = name
+    //     this.monsterSKill.damage = damage
+    //     this.monsterSKill.effect = effect
+    // }
+
+    setSkill(skills:Skills):void{
+        this.monsterSkill = skills
+    }
+
+    useSkill(usedSkill:number, target:Tributes):void{
+        this.monsterSkill[usedSkill].useSkill(target)
+    }
+
+    getMonster():void{
+        console.log(`
+            Nome: ${this.monsterName}
+            Vida: ${this.monsterHealth}
+            Força: ${this.monsterStrength}`)
+
+            // Nome da Habilidade: ${this.monsterSKill.name}.
+            // Efeito Adicional: ${this.monsterSKill.effect}.
+            // Dano: ${this.monsterSKill.damage}.
+    }
+
+    getName():string{
+        return this.monsterName
+    }
+
+    getHealth():number{
+        return this.monsterHealth
+    }
+
+    getStrength():number{
+        return this.monsterStrength
+    }
+}
+
 class Districts{}
 
 export class Skills{
@@ -111,8 +167,9 @@ export class Tributes{
             console.log(`O Tributo ${this.name} recebeu dano.`)
         }
     }
-}
 
+    collectResource
+}
 
 const district1 = new Districts()
 
@@ -120,7 +177,7 @@ const tribute1 = new Tributes()
 tribute1.setAtributes('Kennen', 120, district1, 'Nada')
 
 const tribute2 = new Tributes()
-tribute2.setAtributes('Kat', 80, district1, 'Nada')
+tribute2.setAtributes('Katarina', 80, district1, 'Nada')
 
 const skill1 = new Skills()
 const skill2 = new Skills()
