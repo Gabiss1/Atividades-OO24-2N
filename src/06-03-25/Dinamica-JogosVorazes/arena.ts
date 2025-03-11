@@ -45,9 +45,9 @@ const distrito13 = new Districts()
 distrito13.setAtributes('Distrito 13',['Armas'], 853927)
 
 const tribute1 = new Tributes()
-tribute1.setAtributes('Kennen', 120, distrito1, 'Nada')
+tribute1.setAtributes('Kennen', 120, 35, 10, distrito1, 'Nada')
 const tribute2 = new Tributes()
-tribute2.setAtributes('Katarina', 80, distrito2, 'Nada')
+tribute2.setAtributes('Katarina', 80, 20, 8, distrito2, 'Nada')
 
 const disaster1 = new Disaster()
 disaster1.setNameDisaster('Terremoto')

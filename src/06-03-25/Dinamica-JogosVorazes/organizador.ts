@@ -120,7 +120,7 @@ const skill1 = new Skills()
 skill1.setAtributes('Choque', 'Dispara um raio.', 'Paralisia', 25)
 
 const tribute1 = new Tributes()
-tribute1.setAtributes('Kennen', 120, distrito1, 'Nada')
+tribute1.setAtributes('Kennen', 120,35, 10, distrito1, 'Nada')
 
 const earthquake = new Disaster()
 earthquake.setDamageDisaster(100)

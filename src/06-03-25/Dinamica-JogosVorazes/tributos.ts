@@ -5,24 +5,12 @@ export class Monster{
     monsterHealth:number
     monsterStrength:number
     monsterSkill: Skills
-    
-    // {
-    //     name:string,
-    //     damage:number,
-    //     effect:string
-    // }
 
     setAtributes(name:string, health:number, strength:number):void{
         this.monsterName = name
         this.monsterHealth = health
         this.monsterStrength = strength
     }
-
-    // setSkill(name:string, damage:number, effect:string):void{
-    //     this.monsterSKill.name = name
-    //     this.monsterSKill.damage = damage
-    //     this.monsterSKill.effect = effect
-    // }
 
     setSkill(skills:Skills):void{
         this.monsterSkill = skills
@@ -37,10 +25,6 @@ export class Monster{
             Nome: ${this.monsterName}
             Vida: ${this.monsterHealth}
             Força: ${this.monsterStrength}`)
-
-            // Nome da Habilidade: ${this.monsterSKill.name}.
-            // Efeito Adicional: ${this.monsterSKill.effect}.
-            // Dano: ${this.monsterSKill.damage}.
     }
 
     getName():string{
@@ -70,7 +54,7 @@ export class Skills{
     }
 
     useSkill(skillTarget:Tributes):void{
-        skillTarget.takeDamage(this.skillDamage)
+        skillTarget.calculeDamageResist(this.skillDamage)
     }
 
     getSkill():void{
@@ -101,13 +85,17 @@ export class Skills{
 export class Tributes{
     public name:string
     private health:number
+    private armor:number
+    private resistence:number
     public district:Districts
     private secrets:string
     private skill:Array<Skills> = []
 
-    setAtributes(name:string, health:number, district:Districts, secret:string):void{
+    setAtributes(name:string, health:number, armor:number, resistence:number, district:Districts, secret:string):void{
         this.name = name
         this.health = health
+        this.armor = armor
+        this.resistence = resistence
         this.district = district
         this.secrets = secret
     }
@@ -154,8 +142,16 @@ export class Tributes{
         }
     }
 
+    calculeDamageResist(damage:number):void{
+        let resistencePercentage = this.resistence/100
+        damage -= this.armor
+        damage*=resistencePercentage
+        console.log(damage)
+        this.takeDamage(damage)
+    }
+
     takeDamage(damage:number):void{
-        this.health -= damage
+        this.health = Math.floor(this.health -= damage)
         console.log(this.health)
         if (this.health <= 0) {
             console.log(`O Tributo ${this.name} foi morto.`)
@@ -177,11 +173,15 @@ const distrito1 = new Districts()
 distrito1.setAtributes('Distrito 1',['Jóias'], 3125)
 
 const tribute1 = new Tributes()
-tribute1.setAtributes('Kennen', 120, distrito1, 'Nada')
+tribute1.setAtributes('Kennen', 120,35, 10, distrito1, 'Nada')
+const tribute2 = new Tributes()
+tribute2.setAtributes('Katarina', 80, 20, 8, distrito1, 'Nada')
 
 const skill1 = new Skills()
 skill1.setAtributes('Choque', 'Dispara um raio.', 'Paralisia', 25)
 
+tribute1.setSkills(skill1)
+tribute2.setSkills(skill1)
+
 tribute1.collectResource()
-// tribute1.useSkill(0, tribute2)
-// tribute1.useSkill(0, tribute2)
+tribute1.useSkill(0, tribute2)
