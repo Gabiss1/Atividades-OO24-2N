@@ -20,6 +20,10 @@ export class Monster{
         this.monsterSkill[usedSkill].useSkill(target)
     }
 
+    useAttack():void{
+        const passiveDamage = Math.floor(Math.random()*(this.monsterStrength-30)+15)
+    }
+
     getMonster():void{
         console.log(`
             Nome: ${this.monsterName}

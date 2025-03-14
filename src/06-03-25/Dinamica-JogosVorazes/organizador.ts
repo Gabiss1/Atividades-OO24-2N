@@ -45,13 +45,13 @@ export class Disaster {
         }
         switch (number) {
             case 1:
-                target.takeDamage(this.damage)
+                target.takeDamage(damage)
                 break
                 
             case 2:
                 let randomizerOfDamage = Math.floor(Math.random()*5+1)
-                this.damage*randomizerOfDamage
-                target.takeDamage(this.damage*randomizerOfDamage)
+                damage*randomizerOfDamage
+                target.takeDamage(damage*randomizerOfDamage)
                 break 
 
             default:
