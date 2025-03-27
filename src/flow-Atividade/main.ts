@@ -1,65 +1,58 @@
 import { Animal } from "./Animal";
-import { Mamifero } from "./Mamifero";
+import { Mamifero } from "./Mamifero";  // Todos os mamíferos instanciados se encontram no arquivo Mamifero.
+import { Recurso } from "./Recurso";    // Todos os recursos instanciados se encontram no arquivo Recurso.
 
-const mamifero1 = new Mamifero(
-    "Protagonista",                                 //nome
-    "Capivara",                                     //espécie
-    true,                                           //sede
-    true,                                           //fome
-    "Herbívoro",                                    //alimentacao 
-    "Explorar a vegetação procurando ao arredor",   //habito
-    "Muito",                                        //qtdePelos
-    4,                                              //qtdeMamas
-    "Ahn Ahn"                                       //Onomatopéia
-);
-const mamifero2 = new Mamifero(
-    "Pão",
-    "Cachorro", 
-    true, 
-    false, 
-    "Onívoro", 
-    "Correr pelo gramado querendo brincar", 
-    "Muito", 
-    8,
-    "Au Au"
-);
-const mamifero3 = new Mamifero(
-    "Precioso", 
-    "Lêmure", 
-    false, 
-    true, 
-    "Onívoro", 
-    "Pular de árvore em árvore", 
-    "Pouco", 
-    4,
-    "Hiii-Hiii"
-);
+console.log("========== [FUNÇÃO INTERAGIR] ==========")
+function interagir(animalRecebido1: Animal, animalRecebido2: Animal):void {     // Polimorfose
+    console.log(`${animalRecebido1.getNome()} interagiu com ${animalRecebido2.getNome()}:`);
+    console.log(animalRecebido1.emitirSom());
+    console.log(animalRecebido2.emitirSom(), '\n');
 
-const mamifero4 = new Mamifero(
-    'Flow',
-    'Gato',
-    false,
-    true,
-    'Carnívoro',
-    'Explorar',
-    'Muito',
-    8,
-    'Miau Miau'
-)
+    animalRecebido1.buscarRecurso();
+    animalRecebido2.buscarRecurso();
+}
+interagir(Mamifero.getMamiferos()[0], Mamifero.getMamiferos()[1]);
 
-// Exemplo de um tipo de polimorfose
-function interagir(animalRecebido1: Animal, animalRecebido2: Animal) {
-    const buscarRecurso1 = animalRecebido1.buscarRecurso()
-    const buscarRecurso2 = animalRecebido2.buscarRecurso()
 
-    if (buscarRecurso1 || buscarRecurso2) {
-        console.log("Inventário atual dos animais:"), console.table(Animal.getInventario());
+
+
+// Desafio é daqui em diante
+function indexAleatorio(listaRecebida: Mamifero[] | Recurso[]) {
+    return Math.floor(Math.random() * listaRecebida.length);
+}
+
+function acoes(mamiferos:Mamifero[]) {
+    // Tenta procurar recurso...
+    const recursos:Recurso[] = Recurso.getRecursos();
+    mamiferos[indexAleatorio(mamiferos)].usarRecurso(recursos[indexAleatorio(recursos)]);
+
+    // Tenta se mover...
+    mamiferos[indexAleatorio(mamiferos)].mover();
+
+    // Tenta amamentar...
+    mamiferos[indexAleatorio(mamiferos)].amamentar();
+
+    // Tenta crescer/diminuir pelo...
+    mamiferos[indexAleatorio(mamiferos)].mudarPelo();
+}
+
+console.log("============ [FUNÇÃO SIMULAR] ============");
+function simular(qtde:number = 10) {
+    for (let i=0; i < qtde; i++) {
+        console.log(`=============== ITERAÇÃO ${i+1} ===============`);
+        
+        const mamiferos:Mamifero[] = Mamifero.getMamiferos();
+        const animalAleatorio1:Mamifero = mamiferos[indexAleatorio(mamiferos)];
+        let animalAleatorio2:Mamifero = mamiferos[indexAleatorio(mamiferos)];
+        while (animalAleatorio1 == animalAleatorio2) {
+            animalAleatorio2 = mamiferos[indexAleatorio(mamiferos)];
+        }
+    
+        interagir(animalAleatorio1, animalAleatorio2);
+        acoes(mamiferos);
     }
 }
-interagir(mamifero1, mamifero2);
+simular(5); // Quantidade de simulações
 
-mamifero1.amamentar();
-mamifero3.emitirSomMamifero();
-mamifero2.mudarPelo();
-mamifero1.mover();
-mamifero4.mover()
+console.log(`========== RECURSOS OBTIDOS ==========`);
+console.table(Animal.getInventario(), ["nome"]);
