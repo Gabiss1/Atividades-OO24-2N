@@ -37,8 +37,8 @@ export class Avaliacao{
         return this.imc
     }
 
-    gerarRelatorio():string{
-        return `Relatório Geral: ${this.aluno.getAluno()}IMC: ${this.imc}.\nData: ${this.data}. \nObservações : ${this.observacoes}.`
+    gerarRelatorio():void{
+        console.log(`Relatório Geral: ${this.aluno.getAluno()}IMC: ${this.imc}.\nData: ${this.data}. \nObservações : ${this.observacoes}.`)
     }
 }
 

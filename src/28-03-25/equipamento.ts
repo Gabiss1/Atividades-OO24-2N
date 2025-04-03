@@ -4,9 +4,9 @@ export class Equipamento {
     disponibilidade: boolean
 
     constructor(nome:string, descricao: string, disponibilidade: boolean){
-        this.nome
-        this.descricao
-        this.disponibilidade
+        this.nome = nome
+        this.descricao = descricao
+        this.disponibilidade = disponibilidade
     }
 
     verificarDisponibilidade():void{
@@ -15,5 +15,17 @@ export class Equipamento {
         } else {
             console.log(`O equipamento ${this.nome} não está disponível.`)
         }
+    }
+
+    getNome():string{
+        return this.nome
+    }
+
+    getDescricao():string{
+        return this.descricao
+    }
+
+    getDisponibilidade():boolean{
+        return this.disponibilidade
     }
 }
