@@ -9,4 +9,16 @@ export class Instrutor extends Usuario{
         this.especialidade = especialidade
         this.cref = cref
     }
+
+    getEspecialidade():string{
+        return this.especialidade
+    }
+
+    getCref():string{
+        return this.cref
+    }
+
+    getInstrutor():string{
+        return `\n${this.getUsuario()}\nEspecialidade: ${this.especialidade}.\nCREF: ${this.cref}.\n`
+    }
 }

@@ -11,7 +11,11 @@ export class Usuario {
         return this.nome
     }
 
-    exibirInformacoes():void{
-        console.log(`Nome do Usuário: ${this.nome} - Email: ${this.email}`)
+    getEmail():string{
+        return this.email
+    }
+
+    getUsuario():string{
+        return `Nome: ${this.nome}\nEmail: ${this.email}`
     }  
 }

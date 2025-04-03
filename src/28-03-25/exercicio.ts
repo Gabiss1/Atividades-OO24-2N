@@ -8,4 +8,20 @@ export class Exercicio {
         this.serie = serie
         this.repeticoes = repeticoes
     }
+
+    getNome():string{
+        return this.nome
+    }
+
+    getSerie():number{
+        return this.serie
+    }
+
+    getRepeticoes():number{
+        return this.repeticoes
+    }
+
+    getExercicio():string{
+        return `\nNome: ${this.nome}.\nSerie: ${this.serie}.\nRepetições: ${this.repeticoes}.`
+    }
 }

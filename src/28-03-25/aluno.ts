@@ -25,7 +25,11 @@ export class Aluno extends Usuario{
     }
 
     calcularIMC():number{
-        let imc = this.peso/(this.altura^2)
+        let imc = Math.floor(this.peso/(this.altura^2))
         return imc
+    }
+
+    getAluno():string{
+        return `\n${this.getUsuario()}\nIdade: ${this.idade}.\nPeso: ${this.peso}.\nAltura: ${this.altura}.\n`
     }
 }
