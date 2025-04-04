@@ -24,8 +24,8 @@ export class Aluno extends Usuario{
         return this.altura
     }
 
-    calcularIMC():number{
-        let imc = Math.floor(this.peso/(this.altura^2))
+    getIMC():number{
+        const imc = Math.floor(this.peso/(this.altura^2))
         return imc
     }
 

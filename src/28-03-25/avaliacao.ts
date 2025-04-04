@@ -14,7 +14,7 @@ export class Avaliacao{
         this.observacoes = observacoes
         this.peso = aluno.getPeso()
         this.altura = aluno.getAltura()
-        this.imc = aluno.calcularIMC()
+        this.imc = aluno.getIMC()
     }
 
     getData():string{
@@ -41,4 +41,3 @@ export class Avaliacao{
         console.log(`Relatório Geral: ${this.aluno.getAluno()}IMC: ${this.imc}.\nData: ${this.data}. \nObservações : ${this.observacoes}.`)
     }
 }
-

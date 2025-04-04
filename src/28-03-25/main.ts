@@ -23,3 +23,10 @@ console.log(`\n\nTreinar\n\n`)
 
 treino1.treinar(equipamento1)
 avaliacao1.gerarRelatorio()
+
+// Usando o método Treino - Falhando
+console.log(`\n\nTreinar - Falha\n`)
+
+equipamento1.disponibilidade = false
+
+treino1.treinar(equipamento1)
