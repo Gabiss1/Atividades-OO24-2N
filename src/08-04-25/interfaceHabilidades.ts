@@ -7,7 +7,7 @@ export interface Habilidade {
     classe: number
     valorEfeito: number
 
-    usarHabilidade(nomeUsuario:string, alvo: Monstro):void
+    usarHabilidade(nomeUsuario:string, alvo: Monstro | Cacador):void
     calcularEfeito(alvo: Monstro | Cacador):void
     exibirDescricao():void
 }

@@ -21,8 +21,8 @@ export class AtaqueFisico implements Habilidade{
     }
 
     calcularEfeito(alvo: Monstro):void{
-        alvo.vida -= this.valorEfeito
-        console.log(`${alvo.nome} recebeu ${this.valorEfeito} de dano.`)
+        alvo.receberDano(this.valorEfeito)
+        console.log(`${alvo.getNome()} recebeu ${this.valorEfeito} de dano.`)
     }
     exibirDescricao():void{
         console.log(`${this.descricao}.`)
@@ -48,8 +48,8 @@ export class MagiaCura implements Habilidade{
     }
 
     calcularEfeito(alvo: Cacador):void{
-        alvo.vida += this.valorEfeito
-        console.log(`${alvo.nome} foi curado em ${this.valorEfeito} pontos.`)
+        alvo.receberCura(this.valorEfeito)
+        console.log(`${alvo.getNome()} foi curado em ${this.valorEfeito} pontos.`)
     }
 
     exibirDescricao():void{
@@ -76,8 +76,8 @@ export class MagiaAtaque implements Habilidade{
     }
 
     calcularEfeito(alvo: Monstro):void{
-        alvo.vida -= this.valorEfeito
-        console.log(`${alvo.nome} recebeu ${this.valorEfeito} de dano.`)
+        alvo.receberDano(this.valorEfeito)
+        console.log(`${alvo.getNome()} recebeu ${this.valorEfeito} de dano.`)
     }
 
     exibirDescricao():void{
@@ -107,18 +107,18 @@ export class MagiaFortalecimento implements Habilidade{
 
     calcularEfeito(alvo: Cacador):void{
         if (this.fortalecimento === 'resistencia') {
-            alvo.resistencia += this.valorEfeito
-            console.log(`A Resistência de ${alvo.nome} aumentou!`)
+            alvo.aumentarResistencia(this.valorEfeito)
+            console.log(`A Resistência de ${alvo.getNome()} aumentou!`)
         } else if (this.fortalecimento === 'forca'){
-            alvo.forca += this.valorEfeito
-            console.log(`A Força de ${alvo.nome} aumentou!`)
+            alvo.aumentarResistencia(this.valorEfeito)
+            console.log(`A Força de ${alvo.getNome()} aumentou!`)
         } else if (this.fortalecimento === 'velocidade') {
-            alvo.velocidade += this.valorEfeito
-            console.log(`A Velocidade de ${alvo.nome} aumentou!`)
+            alvo.aumentarVelocidade(this.valorEfeito)
+            console.log(`A Velocidade de ${alvo.getNome()} aumentou!`)
         } else {
-            alvo.vida -= this.valorEfeito
-            alvo.forca += this.valorEfeito
-            console.log(`A magia parace não ter funcionado corretamente, mas ${alvo.nome} ficou mais forte!`)
+            alvo.receberDano(this.valorEfeito)
+            alvo.aumentarForca(this.valorEfeito)
+            console.log(`A magia parace não ter funcionado corretamente, mas ${alvo.getNome()} ficou mais forte!`)
         }
     }
 

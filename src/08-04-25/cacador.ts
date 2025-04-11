@@ -24,6 +24,22 @@ export class Cacador {
         this.habilidades = habilidade
     }
 
+    getNome():string{
+        return this.nome
+    }
+
+    getResistencia():number{
+        return this.resistencia
+    }
+
+    getForca():number{
+        return this.forca
+    }
+
+    getVelocidade():number{
+        return this.velocidade
+    }
+
     equiparHabilidade(nomeHabilidade: string){
         for (const posicao of this.habilidades) {
             if (nomeHabilidade === posicao.nome) {
@@ -36,28 +52,36 @@ export class Cacador {
     }
     }
 
-    usarHabilidade(alvo: Monstro):void{
+    usarHabilidadeAtaque(alvo: Monstro, alvoSuporte: Cacador):void{
         this.habilidadeEquipada[0].usarHabilidade(this.nome, alvo)
         console.log(`A Habilidade ${this.habilidadeEquipada[0].nome} foi utilizada, ${this.nome} não possui mais habilidades equipadas.`)
         this.habilidadeEquipada.pop
     }
 
     receberDano(dano:number):void{
+        dano -= this.resistencia
         this.vida -= dano
         console.log(`${this.nome} está com ${this.vida} de vida`)
-        this.verificarStatus()
     }
 
-    receberCura():void{
-
+    receberCura(cura:number):void{
+        this.vida += cura
+        console.log(`${this.nome} está com ${this.vida} de vida`)
     }
 
-    verificarStatus():void{
-
+    aumentarResistencia(valor:number):void{
+        this.resistencia += valor
+        console.log(`${this.nome} teve sua resistência aumentada para ${this.resistencia} pontos!`)
     }
 
-    alterarStatus():void{
+    aumentarForca(valor:number):void{
+        this.forca += valor
+        console.log(`${this.nome} teve sua força aumentada para ${this.forca} pontos!`)
+    }
 
+    aumentarVelocidade(valor:number):void{
+        this.velocidade += valor
+        console.log(`${this.nome} teve sua velocidade aumentada para ${this.velocidade} pontos!`)
     }
 
     listarHabilidade():void{
