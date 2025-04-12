@@ -4,7 +4,7 @@ import { Monstro } from "./monstro"
 export interface Habilidade {
     nome: string
     descricao: string
-    classe: number
+    classe: string
     valorEfeito: number
 
     usarHabilidade(nomeUsuario:string, alvo: Monstro | Cacador):void

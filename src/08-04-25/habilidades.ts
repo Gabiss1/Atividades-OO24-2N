@@ -5,10 +5,10 @@ import { Monstro } from "./monstro";
 export class AtaqueFisico implements Habilidade{
     nome: string
     descricao: string
-    classe: number
+    classe: string
     valorEfeito: number
 
-    constructor(nome:string, descricao:string, classe:number, valorEfeito:number){
+    constructor(nome:string, descricao:string, classe:string, valorEfeito:number){
         this.nome = nome
         this.descricao = descricao
         this.classe = classe
@@ -32,10 +32,10 @@ export class AtaqueFisico implements Habilidade{
 export class MagiaCura implements Habilidade{
     nome: string
     descricao: string
-    classe: number
+    classe: string
     valorEfeito: number
 
-    constructor(nome:string, descricao:string, classe:number, valorEfeito:number){
+    constructor(nome:string, descricao:string, classe:string, valorEfeito:number){
         this.nome = nome
         this.descricao = descricao
         this.classe = classe
@@ -60,10 +60,10 @@ export class MagiaCura implements Habilidade{
 export class MagiaAtaque implements Habilidade{
     nome: string
     descricao: string
-    classe: number
+    classe: string
     valorEfeito: number
 
-    constructor(nome:string, descricao:string, classe:number, valorEfeito:number){
+    constructor(nome:string, descricao:string, classe:string, valorEfeito:number){
         this.nome = nome
         this.descricao = descricao
         this.classe = classe
@@ -88,11 +88,11 @@ export class MagiaAtaque implements Habilidade{
 export class MagiaFortalecimento implements Habilidade{
     nome: string
     descricao: string
-    classe: number
+    classe: string
     valorEfeito: number
     fortalecimento: string
 
-    constructor(nome:string, descricao:string, classe:number, valorEfeito:number, fortalecimento:string){
+    constructor(nome:string, descricao:string, classe:string, valorEfeito:number, fortalecimento:string){
         this.nome = nome
         this.descricao = descricao
         this.classe = classe

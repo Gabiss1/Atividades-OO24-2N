@@ -2,14 +2,14 @@ import { Habilidade } from "./interfaceHabilidades"
 import { Monstro } from "./monstro"
 
 export class Cacador {
-    nome: string
-    nivel: number
-    vida: number
-    resistencia: number
-    forca: number
-    velocidade: number
-    habilidades: Habilidade[]
-    habilidadeEquipada: Habilidade[] = []
+    private nome: string
+    private nivel: number
+    private vida: number
+    private resistencia: number
+    private forca: number
+    private velocidade: number
+    private habilidades: Habilidade[] = []
+    private habilidadeEquipada: Habilidade[] = []
 
     constructor(nome: string, nivel: number, vida: number, resistencia: number, forca: number, velocidade: number){
         this.nome = nome
@@ -20,12 +20,20 @@ export class Cacador {
         this.velocidade = velocidade
     }
 
-    setHabilidades(habilidade: Habilidade[]):void{
-        this.habilidades = habilidade
+    setHabilidade(habilidade: Habilidade):void{
+        this.habilidades.push(habilidade)
     }
 
     getNome():string{
         return this.nome
+    }
+
+    getVida():number{
+        return this.vida
+    }
+
+    getQuantidadeHabilidades():number{
+        return this.habilidades.length
     }
 
     getResistencia():number{
@@ -40,28 +48,34 @@ export class Cacador {
         return this.velocidade
     }
 
-    equiparHabilidade(nomeHabilidade: string){
-        for (const posicao of this.habilidades) {
-            if (nomeHabilidade === posicao.nome) {
-                this.habilidadeEquipada.push(posicao)
-            }
+    getHabilidadeEquipada():Habilidade{
+        return this.habilidadeEquipada[0]
     }
 
+    equiparHabilidade(posicaoHabilidade: number){
+        let habilidadeEscolhida = this.habilidades[posicaoHabilidade]
+        this.habilidadeEquipada.push(habilidadeEscolhida)
+    
     if (this.habilidadeEquipada.length === 0) {
-        console.log(`${this.nome} não possui a habilidade ${nomeHabilidade}. Nenhuma habilidade foi equipada.`)
+        console.log(`${this.nome} não possui a habilidade ${habilidadeEscolhida.nome}. Nenhuma habilidade foi equipada.`)
     }
     }
 
-    usarHabilidadeAtaque(alvo: Monstro, alvoSuporte: Cacador):void{
+    usarHabilidade(alvo: Monstro | Cacador):void{
         this.habilidadeEquipada[0].usarHabilidade(this.nome, alvo)
         console.log(`A Habilidade ${this.habilidadeEquipada[0].nome} foi utilizada, ${this.nome} não possui mais habilidades equipadas.`)
-        this.habilidadeEquipada.pop
+        this.habilidadeEquipada.pop()
     }
 
     receberDano(dano:number):void{
         dano -= this.resistencia
         this.vida -= dano
-        console.log(`${this.nome} está com ${this.vida} de vida`)
+        if (this.vida > 0) {
+            console.log(`${this.nome} está com ${this.vida} de vida`)
+        } else if(this.vida <= 0){
+            console.log(`${this.nome} está com 0 de vida`)
+        }
+        
     }
 
     receberCura(cura:number):void{
@@ -85,9 +99,13 @@ export class Cacador {
     }
 
     listarHabilidade():void{
-        for (const posicao of this.habilidades) {
-            console.log(`${this.habilidades.indexOf(posicao)+1} - ${posicao.nome}.`)
+
+        for (let i = 0; i < this.habilidades.length; i++) {
+            console.log(`${i+1} - ${this.habilidades[i].nome}.`)
         }
+        // for (const posicao of this.habilidades) {
+        //     console.log(`${this.habilidades.indexOf(posicao)+1} - ${posicao.nome}.`)
+        // }
     }
 
     exibirCacador():void{
