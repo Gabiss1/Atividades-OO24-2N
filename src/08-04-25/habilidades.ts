@@ -126,3 +126,36 @@ export class MagiaFortalecimento implements Habilidade{
         console.log(`${this.descricao}`)
     }
 }
+
+export class habilidadeProtagonista {
+    nome: string
+    descricao: string
+    classe: number
+    valorEfeito = 0
+
+    constructor(nome:string, descricao:string, classe:number){
+        this.nome = nome
+        this.descricao = descricao
+        this.classe = classe
+    }
+
+    setEfeito(efeito:number){
+        this.valorEfeito = efeito
+    }
+    
+    arise(alvo: Monstro):void {
+        if (alvo.getVida() > 0){
+            console.log('Esta habilidade pode apenas ser usadas em corpos')
+        } else {
+            let index = 0
+            while (index < 3 && this.valorEfeito === 0){
+            this.valorEfeito = Math.floor(Math.random() * 2)
+            index++
+            } if (this.valorEfeito === 1) {
+                alvo.serInvocado()
+        }
+        index = 0
+        this.setEfeito(0)
+    }
+    }
+}

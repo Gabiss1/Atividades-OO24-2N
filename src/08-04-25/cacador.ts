@@ -1,3 +1,4 @@
+import { habilidadeProtagonista } from "./habilidades"
 import { Habilidade } from "./interfaceHabilidades"
 import { Monstro } from "./monstro"
 
@@ -10,6 +11,7 @@ export class Cacador {
     private velocidade: number
     private habilidades: Habilidade[] = []
     private habilidadeEquipada: Habilidade[] = []
+    private habilidadeEspecial: habilidadeProtagonista[] = []
 
     constructor(nome: string, nivel: number, vida: number, resistencia: number, forca: number, velocidade: number){
         this.nome = nome
@@ -24,12 +26,20 @@ export class Cacador {
         this.habilidades.push(habilidade)
     }
 
+    setHabilidadeEspecial(habilidade: habilidadeProtagonista):void{
+        this.habilidadeEspecial.push(habilidade)
+    }
+
     getNome():string{
         return this.nome
     }
 
     getVida():number{
         return this.vida
+    }
+
+    getHabilidadeEspecial():habilidadeProtagonista[]{
+        return this.habilidadeEspecial
     }
 
     getQuantidadeHabilidades():number{
@@ -69,11 +79,15 @@ export class Cacador {
 
     receberDano(dano:number):void{
         dano -= this.resistencia
-        this.vida -= dano
+        if (dano > 0) {
+            this.vida -= dano
         if (this.vida > 0) {
             console.log(`${this.nome} está com ${this.vida} de vida`)
         } else if(this.vida <= 0){
             console.log(`${this.nome} está com 0 de vida`)
+        }
+        } else {
+            console.log(`${this.nome} não sofreu dano.`)
         }
         
     }
@@ -103,9 +117,6 @@ export class Cacador {
         for (let i = 0; i < this.habilidades.length; i++) {
             console.log(`${i+1} - ${this.habilidades[i].nome}.`)
         }
-        // for (const posicao of this.habilidades) {
-        //     console.log(`${this.habilidades.indexOf(posicao)+1} - ${posicao.nome}.`)
-        // }
     }
 
     exibirCacador():void{
