@@ -1,21 +1,3 @@
-/*constructor(nomeFeitico: string, poderFeitico: number, descricaoFeitico: string) {
-    this.nome = nomeFeitico
-    this.poderBase = poderFeitico
-    this.descricao = descricaoFeitico
-}
-
-getNome(): string {
-    return this.nome
-}
-
-getPoderBase(): number {
-    return this.poderBase
-}
-
-getDescricao(): string {
-    return this.descricao
-} */
-
 import { Bruxo } from "./bruxo";
 import { CriaturaMagica } from "./criaturasMagicas";
 import { Feitico } from "./feiticoInterface";
@@ -37,7 +19,7 @@ export class FeiticoAtaque implements Feitico{
         return this.nome
     }
     
-    getPoderBase(): number {
+    getPoder(): number {
         return this.poderBase
     }
     
@@ -69,7 +51,7 @@ export class FeiticoDefesa implements Feitico{
         return this.nome
     }
     
-    getPoderBase(): number {
+    getPoder(): number {
         return this.poderBase
     }
     

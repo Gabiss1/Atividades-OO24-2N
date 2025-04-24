@@ -9,4 +9,7 @@ export interface Feitico {
 
     lancarFeitico(alvo: CriaturaMagica):void
     ativarEfeito(poder: number, alvo: CriaturaMagica):void
+    getNome():string
+    getPoder():number
+    getDescricao():string
 }
