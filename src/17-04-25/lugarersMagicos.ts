@@ -1,4 +1,3 @@
-
 export class LugarMagico {
     protected nome: string
     protected andares: number

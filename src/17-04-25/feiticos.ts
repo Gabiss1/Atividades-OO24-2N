@@ -1,7 +1,8 @@
-import { Bruxo } from "./bruxo";
+import { Feiticos } from "../Atividades/22-02-25/harryPotter";
 import { CriaturaMagica } from "./criaturasMagicas";
+import { Efeito } from "./efeitos";
 import { Feitico } from "./feiticoInterface";
-import { Guardiao } from "./guardiao";
+import { Objeto } from "./objetos";
 
 
 export class FeiticoAtaque implements Feitico{
@@ -27,11 +28,11 @@ export class FeiticoAtaque implements Feitico{
         return this.descricao
     }
 
-    lancarFeitico(alvo: CriaturaMagica | Guardiao): void {
+    lancarFeitico(alvo: CriaturaMagica): void {
         this.ativarEfeito(this.poderBase, alvo)
     }
 
-    ativarEfeito(poder: number, alvo: CriaturaMagica | Guardiao): void {
+    ativarEfeito(poder: number, alvo: CriaturaMagica): void {
         alvo.receberDano(poder)
     }
 }
@@ -65,5 +66,37 @@ export class FeiticoDefesa implements Feitico{
 
     ativarEfeito(poder: number, alvo: CriaturaMagica): void {
         alvo.receberProtecao(poder)
+    }
+}
+
+export class FeiticoSuporte implements Feitico{
+    nome: string
+    poderBase: Efeito
+    descricao: string
+    
+    constructor(nomeFeitico: string, poderFeitico: Efeito, descricaoFeitico: string) {
+        this.nome = nomeFeitico
+        this.poderBase = poderFeitico
+        this.descricao = descricaoFeitico
+    }
+    
+    getNome(): string {
+        return this.nome
+    }
+    
+    getPoder(): Efeito {
+        return this.poderBase
+    }
+    
+    getDescricao(): string {
+        return this.descricao
+    }
+
+    lancarFeitico(alvo: CriaturaMagica | Objeto): void {
+        this.ativarEfeito(this.poderBase, alvo)
+    }
+
+    ativarEfeito(poder: Efeito, alvo: CriaturaMagica | Objeto): void {
+        alvo.receberEfeito(poder)
     }
 }

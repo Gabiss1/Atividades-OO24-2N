@@ -1,14 +1,15 @@
 import { Casa } from "./casa"
 import { CriaturaMagica } from "./criaturasMagicas"
+import { Efeito } from "./efeitos"
 import { Feitico } from "./feiticoInterface"
 
 export class Bruxo extends CriaturaMagica{
-    protected casa:string
-    protected varinha:string
-    protected habilidades: Feitico[] = []
+    private casa: string
+    private varinha: string
+    private habilidades: Feitico[] = []
 
-    constructor(nome: string, vida: number, tipo: string, poder: number, varinha:string){
-        super(nome, vida, tipo, poder)
+    constructor(nome: string, vida: number, tipo: string, poder: number, defesa: number, varinha:string){
+        super(nome, vida, tipo, poder, defesa)
         this.varinha = varinha
     }
 
@@ -29,6 +30,10 @@ export class Bruxo extends CriaturaMagica{
         return this.poder
     }
 
+    getVarinha(): string{
+        return this.varinha
+    }
+
     getCasa(): string{
         return this.casa
     }
@@ -38,8 +43,23 @@ export class Bruxo extends CriaturaMagica{
         this.habilidades.push(magia)
     }
 
-    usarMagia(): void{
+    usarMagia(magia: Feitico, alvo: CriaturaMagica): void{
+        magia.lancarFeitico(alvo)
+    }
 
+    receberDano(dano: number): void{
+        dano -= this.defesa
+        this.vida -= dano
+        console.log(`${this.nome} sofreu ${dano} de dano!`)
+        console.log(`${this.nome} está com ${this.vida} de vida!`)
+    }
+
+    receberProtecao(defesaExtra: number): void {
+        this.defesa += defesaExtra
+    }
+
+    receberEfeito(efeito: Efeito): void {
+        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
     }
 
     chapeuSeletor(casas: Casa[]):void{

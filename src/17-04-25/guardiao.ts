@@ -1,46 +1,97 @@
 import { CriaturaMagica } from "./criaturasMagicas";
+import { Feitico } from "./feiticoInterface";
 
 export abstract class Guardiao extends CriaturaMagica {
+    private habilidade: Feitico
 
-    constructor(nomeGuardiao: string, vidaGuardiao: number, tipoGuardiao: string, poderGuardiao: number) {
-        super(nomeGuardiao, vidaGuardiao, tipoGuardiao, poderGuardiao)
+    constructor(nomeGuardiao: string, vidaGuardiao: number, tipoGuardiao: string, poderGuardiao: number, defesaGuardiao: number, magiaGuardiao: Feitico) {
+        super(nomeGuardiao, vidaGuardiao, tipoGuardiao, poderGuardiao, defesaGuardiao)
+        this.habilidade = magiaGuardiao
     }
 
-    usarMagia(): void {}
+    usarMagia(feitico: Feitico, alvo: CriaturaMagica): void {}
 
     protegerSegredo(): void {}
 
     receberDano(dano: number): void{}
+
+    receberProtecao(defesa: number): void {}
 }
 
 export class Cerberus extends Guardiao {
 
-    constructor(nomeCerberus: string, vidaCerberus: number, tipoCerberus: string, poderCerberus: number) {
-        super(nomeCerberus, vidaCerberus, tipoCerberus, poderCerberus)
+    constructor(nomeCerberus: string, vidaCerberus: number, tipoCerberus: string, poderCerberus: number, defesaCerberus: number, magiaCerberus: Feitico) {
+        super(nomeCerberus, vidaCerberus, tipoCerberus, poderCerberus, defesaCerberus, magiaCerberus)
     }
 
-    usarMagia(): void {
-        
+    usarMagia(magia: Feitico, alvo: CriaturaMagica): void{
+        magia.lancarFeitico(alvo)
     }
 
-    protegerSegredo(): void {}
+    protegerSegredo(): void {
+        console.log(`${this.nome} está protegendo a Pedra Filosofal!!`)
+    }
 
-    receberDano(dano: number): void{}
+    receberDano(dano: number): void{
+        dano -= this.defesa
+        this.vida -= dano
+        console.log(`${this.nome} sofreu ${dano} de dano!`)
+        console.log(`${this.nome} está com ${this.vida} de vida!`)
+    }
+
+    receberProtecao(defesaExtra: number): void {
+        this.defesa += defesaExtra
+    }
 }
 
 export class Basilisco extends Guardiao {
 
-    constructor(nomeBasilisco: string, vidaBasilisco: number, tipoBasilisco: string, poderBasilisco: number) {
-        super(nomeBasilisco, vidaBasilisco, tipoBasilisco, poderBasilisco)
+    constructor(nomeBasilisco: string, vidaBasilisco: number, tipoBasilisco: string, poderBasilisco: number, defesaBasilisco: number, magiaBasilisco: Feitico) {
+        super(nomeBasilisco, vidaBasilisco, tipoBasilisco, poderBasilisco, defesaBasilisco, magiaBasilisco)
     }
 
-    usarMagia(): void {
-        
+    usarMagia(magia: Feitico, alvo: CriaturaMagica): void{
+        magia.lancarFeitico(alvo)
     }
 
     protegerSegredo(): void {
-        
+        console.log(`${this.nome} está protegendo a Câmara Secreta!!`)
     }
 
-    receberDano(dano: number): void{}
+    receberDano(dano: number): void{
+        dano -= this.defesa
+        this.vida -= dano
+        console.log(`${this.nome} sofreu ${dano} de dano!`)
+        console.log(`${this.nome} está com ${this.vida} de vida!`)
+    }
+
+    receberProtecao(defesaExtra: number): void {
+        this.defesa += defesaExtra
+    }
+}
+
+export class FantasmaDaCorvinal extends Guardiao {
+
+    constructor(nomeFantasma: string, vidaFantasma: number, tipoFantasma: string, poderFantasma: number, defesaFantasma: number, magiaFantasma: Feitico) {
+        super(nomeFantasma, vidaFantasma, tipoFantasma, poderFantasma, defesaFantasma, magiaFantasma)
+    }
+
+    usarMagia(magia: Feitico, alvo: CriaturaMagica): void{
+        magia.lancarFeitico(alvo)
+    }
+
+    protegerSegredo(): void {
+        console.log(`${this.nome} está protegendo a Torre da Corvinal!!`)
+    }
+
+    receberDano(dano: number): void{
+        dano -= this.defesa
+        this.vida -= dano
+        console.log(`${this.nome} sofreu ${dano} de dano!`)
+        console.log(`${this.nome} está com ${this.vida} de vida!`)
+    }
+
+    receberProtecao(defesaExtra: number): void {
+        this.defesa += defesaExtra
+    }
 }
