@@ -1,9 +1,8 @@
-import { Feiticos } from "../Atividades/22-02-25/harryPotter";
 import { CriaturaMagica } from "./criaturasMagicas";
 import { Efeito } from "./efeitos";
 import { Feitico } from "./feiticoInterface";
 import { Objeto } from "./objetos";
-
+import { Fenix } from "./subCriaturas";
 
 export class FeiticoAtaque implements Feitico{
     nome: string
@@ -66,6 +65,38 @@ export class FeiticoDefesa implements Feitico{
 
     ativarEfeito(poder: number, alvo: CriaturaMagica): void {
         alvo.receberProtecao(poder)
+    }
+}
+
+export class FeiticoCura implements Feitico{
+    nome: string
+    poderBase: number
+    descricao: string
+
+    constructor(nome: string, poder: number, descricao: string){
+        this.nome = nome
+        this.poderBase = poder
+        this.descricao = descricao
+    }
+
+    getNome(): string {
+        return this.nome
+    }
+    
+    getPoder(): number {
+        return this.poderBase
+    }
+    
+    getDescricao(): string {
+        return this.descricao
+    }
+
+    lancarFeitico(alvo: Fenix): void {
+        this.ativarEfeito(this.poderBase, alvo)
+    }
+
+    ativarEfeito(poder: number, alvo: Fenix): void {
+        alvo.renascer(poder)
     }
 }
 

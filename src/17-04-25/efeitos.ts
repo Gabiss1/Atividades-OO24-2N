@@ -8,7 +8,7 @@ export class Efeito {
     }
 
     getNome(): string{
-        return nome
+        return this.nome
     }
 
     getTipoEfeito(): string{

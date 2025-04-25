@@ -1,5 +1,6 @@
 import { CriaturaMagica } from "./criaturasMagicas";
 import { Feitico } from "./feiticoInterface";
+import { Efeito } from "./efeitos";
 
 export abstract class Guardiao extends CriaturaMagica {
     private habilidade: Feitico
@@ -16,6 +17,8 @@ export abstract class Guardiao extends CriaturaMagica {
     receberDano(dano: number): void{}
 
     receberProtecao(defesa: number): void {}
+
+    receberEfeito(efeito: Efeito): void {}
 }
 
 export class Cerberus extends Guardiao {
@@ -41,6 +44,10 @@ export class Cerberus extends Guardiao {
 
     receberProtecao(defesaExtra: number): void {
         this.defesa += defesaExtra
+    }
+
+    receberEfeito(efeito: Efeito): void {
+        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
     }
 }
 
@@ -68,6 +75,10 @@ export class Basilisco extends Guardiao {
     receberProtecao(defesaExtra: number): void {
         this.defesa += defesaExtra
     }
+
+    receberEfeito(efeito: Efeito): void {
+        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+    }
 }
 
 export class FantasmaDaCorvinal extends Guardiao {
@@ -93,5 +104,9 @@ export class FantasmaDaCorvinal extends Guardiao {
 
     receberProtecao(defesaExtra: number): void {
         this.defesa += defesaExtra
+    }
+
+    receberEfeito(efeito: Efeito): void {
+        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
     }
 }
