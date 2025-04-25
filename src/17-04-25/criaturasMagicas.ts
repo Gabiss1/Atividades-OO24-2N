@@ -1,3 +1,4 @@
+import { Efeito } from "./efeitos"
 import { Feitico } from "./feiticoInterface"
 
 export abstract class CriaturaMagica {
@@ -20,4 +21,6 @@ export abstract class CriaturaMagica {
     receberDano(dano: number): void{}
 
     receberProtecao(defesa: number): void{}
+
+    receberEfeito(efeito: Efeito): void{}
 }
