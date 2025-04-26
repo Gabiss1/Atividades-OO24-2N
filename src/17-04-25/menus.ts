@@ -3,10 +3,11 @@ import { explorarEscola } from "./main"
 import { aprenderMagia } from "./main"
 import { cadastroBruxo } from "./main"
 import { participarTorneio } from "./main"
+import { consultarDiretor } from "./main"
 
 let estado:boolean = true
 
-export function hogwartsLegacy() {
+export function hogwartsLegacy(bruxoProtagonista: Bruxo) {
 
     while(estado === true){
         console.clear()
@@ -16,22 +17,26 @@ export function hogwartsLegacy() {
         1 - Explorar
         2 - Aprender Magia
         3 - Participar do Torneio Tribuxo
-        4 - Encerrar Aventura
+        4 - Consultar Diretor
+        5 - Encerrar Aventura
         `
         )
         let opcao = rl.questionInt('Escolha uma opcao: ');
         
         switch (opcao) {
             case 1:
-                explorarEscola()
+                explorarEscola(bruxoProtagonista)
             break;
             case 2:
-                aprenderMagia()
+                aprenderMagia(bruxoProtagonista)
             break;
             case 3:
-                participarTorneio()
+                participarTorneio(bruxoProtagonista)
             break;
-            case 4:
+            case 4: 
+                consultarDiretor()
+            break;
+            case 5:
                 console.log('Finalizando o Programa...')
                 estado = false
                 break;
@@ -59,7 +64,6 @@ while(estado === true){
     switch (opcao) {
         case 1:
             cadastroBruxo()
-            hogwartsLegacy()
         break;
         case 2:
             console.log('Finalizando o Programa...')

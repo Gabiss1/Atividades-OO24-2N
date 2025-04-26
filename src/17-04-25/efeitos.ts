@@ -1,3 +1,6 @@
+import { CriaturaMagica } from "./criaturasMagicas"
+import { Objeto } from "./objetos"
+
 export class Efeito {
     nome: string
     tipoEfeito: string
@@ -13,5 +16,9 @@ export class Efeito {
 
     getTipoEfeito(): string{
         return this.tipoEfeito
+    }
+
+    aplicarEfeito(alvo: Objeto | CriaturaMagica): void{
+        alvo.receberEfeito(this)
     }
 }

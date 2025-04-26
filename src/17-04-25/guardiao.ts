@@ -19,6 +19,8 @@ export abstract class Guardiao extends CriaturaMagica {
     receberProtecao(defesa: number): void {}
 
     receberEfeito(efeito: Efeito): void {}
+
+    perderMovimento(): void{}
 }
 
 export class Cerberus extends Guardiao {
@@ -47,7 +49,15 @@ export class Cerberus extends Guardiao {
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }
 
@@ -77,7 +87,15 @@ export class Basilisco extends Guardiao {
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }
 
@@ -106,7 +124,15 @@ export class FantasmaDaCorvinal extends Guardiao {
         this.defesa += defesaExtra
     }
 
-    receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+    rreceberEfeito(efeito: Efeito): void {
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }

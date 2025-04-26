@@ -59,11 +59,29 @@ export class Bruxo extends CriaturaMagica{
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    receberBonus(bonus: number, tipoBonus: string): void{
+        if (tipoBonus === 'Poder') {
+            this.poder += bonus
+        } else if (tipoBonus === 'Defesa') {
+            this.defesa += bonus
+        } else if (tipoBonus === 'Vida') {
+            this.vida += bonus
+        }
     }
 
     chapeuSeletor(casas: Casa[]):void{
         let numAleatorio = Math.floor(Math.random()*casas.length)
         this.setCasa(casas[numAleatorio].getNome())
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }

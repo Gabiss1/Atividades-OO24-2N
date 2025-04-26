@@ -26,7 +26,15 @@ export class Dragao extends CriaturaMagica {
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }
 
@@ -54,12 +62,21 @@ export class Fenix extends CriaturaMagica {
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 
     renascer(poder: number): void{
         if (this.vida <= 0) {
             this.vida += poder
+            console.log(`${this.nome} renasceu das Cinzas!!!`)
         } else {
             console.log(`${this.nome} não pode usar esse poder ainda!!`)
         }
@@ -90,6 +107,14 @@ export class Unicornio extends CriaturaMagica {
     }
 
     receberEfeito(efeito: Efeito): void {
-        console.log(`${this.nome} está ${efeito.tipoEfeito}`)
+        if (efeito.getTipoEfeito() === 'Paralisar') {
+            this.perderMovimento()
+        } else {
+            console.log('Esse efeito não consegue te atingir!')
+        }
+    }
+
+    perderMovimento(): void{
+        console.log(`${this.nome} não pode agir!`)
     }
 }

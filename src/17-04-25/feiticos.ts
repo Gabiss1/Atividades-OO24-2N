@@ -38,10 +38,10 @@ export class FeiticoAtaque implements Feitico{
 
 export class FeiticoDefesa implements Feitico{
     nome: string
-    poderBase: number
+    poderBase: number | Efeito
     descricao: string
     
-    constructor(nomeFeitico: string, poderFeitico: number, descricaoFeitico: string) {
+    constructor(nomeFeitico: string, poderFeitico: number | Efeito, descricaoFeitico: string) {
         this.nome = nomeFeitico
         this.poderBase = poderFeitico
         this.descricao = descricaoFeitico
@@ -51,7 +51,7 @@ export class FeiticoDefesa implements Feitico{
         return this.nome
     }
     
-    getPoder(): number {
+    getPoder(): number | Efeito {
         return this.poderBase
     }
     
@@ -63,8 +63,12 @@ export class FeiticoDefesa implements Feitico{
         this.ativarEfeito(this.poderBase, alvo)
     }
 
-    ativarEfeito(poder: number, alvo: CriaturaMagica): void {
-        alvo.receberProtecao(poder)
+    ativarEfeito(poder: number | Efeito, alvo: CriaturaMagica): void {
+        if (typeof poder === 'number') {
+            alvo.receberProtecao(poder)
+        } else {
+            alvo.receberEfeito(poder)
+        }
     }
 }
 
@@ -97,37 +101,5 @@ export class FeiticoCura implements Feitico{
 
     ativarEfeito(poder: number, alvo: Fenix): void {
         alvo.renascer(poder)
-    }
-}
-
-export class FeiticoSuporte implements Feitico{
-    nome: string
-    poderBase: Efeito
-    descricao: string
-    
-    constructor(nomeFeitico: string, poderFeitico: Efeito, descricaoFeitico: string) {
-        this.nome = nomeFeitico
-        this.poderBase = poderFeitico
-        this.descricao = descricaoFeitico
-    }
-    
-    getNome(): string {
-        return this.nome
-    }
-    
-    getPoder(): Efeito {
-        return this.poderBase
-    }
-    
-    getDescricao(): string {
-        return this.descricao
-    }
-
-    lancarFeitico(alvo: CriaturaMagica | Objeto): void {
-        this.ativarEfeito(this.poderBase, alvo)
-    }
-
-    ativarEfeito(poder: Efeito, alvo: CriaturaMagica | Objeto): void {
-        alvo.receberEfeito(poder)
     }
 }

@@ -23,4 +23,6 @@ export abstract class CriaturaMagica {
     receberProtecao(defesa: number): void{}
 
     receberEfeito(efeito: Efeito): void{}
+
+    perderMovimento(): void{}
 }
