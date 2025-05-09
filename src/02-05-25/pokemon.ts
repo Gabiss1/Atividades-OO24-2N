@@ -1,131 +1,148 @@
 import { Carta } from "./carta"
+import { Jogador } from "./jogador"
 
 export class Tipo {
-    nome: string
-
-    constructor(nome: string){
-        this.nome = nome
-    }
-
-    getNome(): string{
-        return this.nome
-    }
-}
-
-export class Energia extends Carta{
-    nome: string
-    tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia'
-    private tipoEnergia: Tipo
-
-    constructor(nome: string, tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia', tipoEnergia: Tipo){
-        super(nome, tipo)
-        this.tipoEnergia = tipoEnergia
-    }
-    
-    getNome(): string {
-        return this.nome
-    }
-
-    getTipoCarta(): string {
-        return this.tipo
-    }
-
-    getTipo(): Tipo {
-        return this.tipoEnergia
-    }
-
-    exibirCarta(): void {
-        
-    }
-}
-
-export class Ataques {
     private nome: string
-    private poder: number
-    private energias: Energia[] = []
-
-    constructor(nome: string, poder: number, energias: Energia[]){
-        this.nome = nome
-        this.poder = poder
-        this.energias = energias
+    private simboloEnergia: string
+  
+    constructor(nome: string, simbolo: string) {
+      this.nome = nome
+      this.simboloEnergia = simbolo
     }
-
+  
     getNome(): string {
-        return this.nome
+      return this.nome
     }
-
-    getDano(): number {
-        return this.poder
+  
+    getSimbolo(): string{
+      return this.simboloEnergia
     }
-
-    getCusto(): Energia[]{
-        return this.energias
-    }
-
-    executarAtaque(alvo: Pokemon): void{
-        alvo.receberDano(this.poder)
-    }
-}
-
-export class Evolucao {
-    estagio: number
-
-    constructor(estagio: number){
-        this.estagio = estagio
-    }
-}
-
-export class Pokemon extends Carta{
+  }
+  
+  export class CartaPokemon extends Carta {
     nome: string
-    tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia'
+    tipo: 'Pokemon'
     private tipoPokemon: Tipo
     private vida: number
     private ataques: Ataques[]
     private custoRecuo: number
-
-    constructor(nome: string, tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia', tipoPoke: Tipo, vida: number, ataques: Ataques[], recuo: number){
-        super(nome, tipo)
-        this.tipoPokemon = tipoPoke
-        this.vida = vida
-        this.ataques = ataques
-        this.custoRecuo = recuo
+  
+    constructor(nome: string, tipo: 'Pokemon', vida: number, ataques: Ataques[], custoRecuo: number) {
+      super(nome, tipo)
+      this.vida = vida
+      this.ataques = ataques
+      this.custoRecuo = custoRecuo
     }
-
+  
     getNome(): string {
-        return this.nome
+      return this.nome
     }
-
+  
     getTipoCarta(): string {
-        return this.tipo
+      return this.tipo
     }
-
+  
+    getAtaques(): Ataques[]{
+      return this.ataques
+    }
+  
     getTipo(): Tipo {
-        return this.tipoPokemon
+      return this.tipoPokemon
     }
-
+  
     getVida(): number {
-        return this.vida
+      return this.vida
+    }
+  
+    getRecuo(): number{
+      return this.custoRecuo
     }
 
-    exibirCarta(): void {
-        
+    usarCarta(jogador: Jogador): void {
+      jogador.baixarPokemon()
     }
-
-    verificarAtaque(): void{
-        
+  
+    atacar(alvo: CartaPokemon): void {
+      let ataqueEscolhido = this.ataques[Math.floor(Math.random() * this.ataques.length)]
+      console.log(`\n${this.nome} está usando o ataque ${ataqueEscolhido.getNome()} em ${alvo.getNome()}!`)
+      ataqueEscolhido.executarAtaque(alvo)
     }
-
-    atacar(alvo: Pokemon): void {
-        let ataqueEscolhido = this.ataques[Math.floor(Math.random()*this.ataques.length)]
-        console.log(`\n${this.nome} está usando o ataque ${ataqueEscolhido.getNome()} em ${alvo.getNome()}!`)
-        ataqueEscolhido.executarAtaque(alvo)
-    }
-
-    recuar(): void {}
-
+  
+    recuar(): void { }
+  
     receberDano(dano: number): void {
-        this.vida -= dano
-        console.log(`\n${this.nome} recebeu ${dano} de dano!`)
-        console.log(`${this.nome} está com ${this.vida} de vida!\n`)
+      this.vida -= dano
+      console.log(`\n${this.nome} recebeu ${dano} de dano!`)
+      console.log(`${this.nome} está com ${this.vida} de vida!\n`)
     }
-}
+
+    receberCura(cura: number): void{
+      this.vida += cura
+      console.log(`\n${this.nome} recebeu ${cura} de cura!`)
+      console.log(`${this.nome} está com ${this.vida} de vida!\n`)
+    }
+  
+    exibirCarta(): void {
+      console.log(`
+      Nome: ${this.getNome()}
+      Tipo Carta: ${this.getTipoCarta()}
+      Tipo Pokemon: ${this.getTipo()}
+      Vida: ${this.getVida()}
+      Ataques: ${this.getAtaques()[0]}
+      Recuo: ${this.getRecuo()}
+      `)
+      this.ataques.forEach(ataque => {
+        console.log(`${ataque.getNome()} - Dano: ${ataque.getDano()} - Custo: ${ataque.getCusto()}`)
+      });
+    }
+  
+  }
+  
+  export class Ataques {
+    private nome: string
+    private poder: number
+    private energias: CartaEnergia[] = []
+  
+    constructor(nome: string, poder: number, energias: CartaEnergia[]) {
+      this.nome = nome
+      this.poder = poder
+      this.energias = energias
+    }
+  
+    getNome(): string {
+      return this.nome
+    }
+  
+    getDano(): number {
+      return this.poder
+    }
+  
+    getCusto(): string {
+      let custoCompleto = ''
+      this.energias.forEach(energia => {
+        let simbolo = energia.getTipoEnergia().getSimbolo()
+        custoCompleto += `${simbolo} - `
+      });
+      return custoCompleto
+    }
+  
+    executarAtaque(alvo: CartaPokemon): void {
+      alvo.receberDano(this.poder)
+    }
+  }
+  
+  export class CartaEnergia extends Carta {
+    nome: string
+    tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia'
+    private tipoEnergia: Tipo
+  
+    constructor(nome: string, tipo: 'Pokemon' | 'Item' | 'Apoiador' | 'Energia', tipoEnergia: Tipo) {
+      super(nome, tipo);
+      this.tipoEnergia = tipoEnergia
+    }
+  
+    getTipoEnergia(): Tipo {
+      return this.tipoEnergia
+    }
+  
+  }
