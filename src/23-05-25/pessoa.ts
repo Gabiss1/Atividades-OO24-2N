@@ -20,8 +20,14 @@ export class Pessoa implements Relacionavel{
         this.outrasRelacoes.push(filho)
     }
 
+    getRelacoes(): void{
+        for (let i = 0; i < this.outrasRelacoes.length; i++) {
+            console.log(this.outrasRelacoes[i])
+        }
+    }
+
     descreverRelacao(): string {
-        return ""
+        return this.nome+" está relacionado com:\n"+this.getRelacoes()
     }
 }
 
