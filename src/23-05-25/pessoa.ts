@@ -31,4 +31,3 @@ export class Pessoa implements Relacionavel{
     }
 }
 
-

@@ -13,7 +13,6 @@ export class Node <T>{
     getChildren(): Node<T>[]{
         return this.children
     }
-
 }
 
 const rootNode = new Node("A")
