@@ -1,11 +1,17 @@
 import { Competicao } from "./competicao";
 import { Node } from "./node";
 
-export class Temporada extends Node<Competicao>{
+export class Temporada{
+    private raiz: Node<Competicao>
     private numeroTemporada: string
 
-    constructor(raiz: Competicao){
-        super(raiz)
+    constructor(raiz: Node<Competicao>, numeroTemporada: string){
+        this.raiz = raiz
+        this.numeroTemporada = numeroTemporada
+    }
+
+    getRaiz(): void{
+        this.raiz
     }
 }
 

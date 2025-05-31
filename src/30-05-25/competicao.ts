@@ -6,6 +6,7 @@ export abstract class Competicao{
     }
    
     valorTitulo(): void{}
+    getNome(): void {}
 }
 
 export class Estadual extends Competicao{
@@ -16,6 +17,10 @@ export class Estadual extends Competicao{
 
     valorTitulo(): void {
         
+    }
+    
+    getNome(): void {
+        console.log(this.nome)
     }
 }
 
@@ -28,6 +33,10 @@ export class Nacional extends Competicao{
     valorTitulo(): void {
         
     }
+
+    getNome(): void {
+        console.log(this.nome)
+    }
 }
 
 export class Continental extends Competicao{
@@ -38,6 +47,10 @@ export class Continental extends Competicao{
 
     valorTitulo(): void {
         
+    }
+
+    getNome(): void {
+        console.log(this.nome)
     }
 }
 
