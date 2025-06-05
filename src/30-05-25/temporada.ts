@@ -10,8 +10,8 @@ export class Temporada{
         this.numeroTemporada = numeroTemporada
     }
 
-    getRaiz(): void{
-        this.raiz
+    getRaiz(): Node<Competicao>{
+        return this.raiz
     }
 }
 

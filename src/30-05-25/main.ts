@@ -31,3 +31,5 @@ nodeCampNacionalC.addChildren(nodeCampNacionalD)
 nodeCampNacionalD.addChildren(nodeEstadual)
 
 const temporada = new Temporada(nodeContinental, "Temporada 2024")
+
+console.log(temporada.getRaiz().getChildren())
