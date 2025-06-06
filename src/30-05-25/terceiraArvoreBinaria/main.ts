@@ -79,6 +79,7 @@ class BST {
   }
 
   // Método de Busca de Nó:
+  // Recebe uma Raíz e um valor, se um nodo com o valor correspondente estiver na Árvore retorna true, se não estiver retorna false e repete o método.
   searchNode(root: BstNode, value: number): boolean {
     if (!root) {
       return false;
@@ -96,10 +97,11 @@ class BST {
       return this.searchNode(root.right, value);
     }
 
-    // value === root.value
     return true;
   }
 
+  // Método de deletar:
+  // Recebe um valor e executa o método "removeNode" passando a Raíz e um valor como parâmetro.
   remove(value: number): void {
     if (!this.root) {
       return;
@@ -108,40 +110,42 @@ class BST {
     }
   }
   
+  // Método deletar Nó:
+  // Se o valor for menor que a Raíz, acessar a subárvore da esqueda
+  // Se o valor for maior que o da Raíz, acessa a subárvore da direita, se o valor for encotrado ele é removido.
+  // Se não houver Nós filhos apenas remove o no Raíz.
+  // Se tiver um nó filho na esquerda ele é removido, o mesmo vale para a direita.
+  // Se houver 2 Nós filhos realoca os dois para reorganizar a árvore.
   removeNode(root: BstNode, value: number): null | BstNode {
-    // If value is less than root value, go to the left subtree
+    // Validações:
     if (value < root.value && root.left !== null) {
       root.left = this.removeNode(root.left, value);
       return root;
-      // If value is greater than root value, go to the right subtree
     } else if (value > root.value && root.right !== null) {
       root.right = this.removeNode(root.right, value);
       return root;
-      // If we found the value, remove the node
     } else {
-      // If no child nodes, just remove the node
+    // Remover a Nó escolhido:
       if (!root.left && !root.right) {
         return null;
       }
-      // If one child (left)
       if (root.left) {
         root = root.left;
         return root;
-        // If one child (right)
       } else if (root.right) {
         root = root.right;
         return root;
       }
-      // If two child nodes (both)
-      // Get the minimum of the right subtree to ensure we have valid replacement
+
       let minRight = this.findMinNode(root.right!);
       root.value = minRight.value;
-      // Make sure we remove the node that we replaced the deleted node
+
       root.right = this.removeNode(root.right!, minRight.value);
       return root;
     }
   }
   
+  // Método para encontrar o menor nodo da Árvore.
   findMinNode(root: BstNode): BstNode {
     if (!root.left) {
       return root
@@ -151,7 +155,7 @@ class BST {
   }
 }
 
-//　for checking result
+//　Array para criar os Nós e executar os comandos de busca, exibir e deletar.
 const inputs: [string, number?, string?][] = [
   ["insert", 50, 'Mundial'],
   ["insert", 100, 'Champions League'],
@@ -169,8 +173,10 @@ const inputs: [string, number?, string?][] = [
   ["find", 70],
   ["find", 800],
   ["print"],
+  ["delete", 100],
   ["print"]
 ];
+
 const bst = new BST();
 
 inputs.forEach(input => {
