@@ -1,31 +1,40 @@
+// Interface Base 
 interface BstNodeInterface {
   value: number;
+  name: string;
   left: BstNodeInterface | null;
   right:BstNodeInterface | null;
 }
 
+// Class Nó implementando a interface base
 class BstNode implements BstNodeInterface {
-  constructor(value: number) {
+  constructor(value: number, name: string) {
     this.left = null;
     this.right = null;
     this.value = value;
+    this.name = name;
   }
 
   value: number;
+  name: string;
   left: BstNodeInterface | null;
   right: BstNodeInterface | null;
 }
 
+// Classe da Árvore
 class BST {
-  root: BstNode | null;
+  root: BstNode | null; // Raíz da Árvore
 
   constructor() {
-    this.root = null;
+    this.root = null; // Constructor declarando o valor de raíz como nulo para não precisar passar nenhum valor ao criar a Árvore
   }
-  
-  insert(value: number) {
-    let newNode = new BstNode(value);
-    // If root empty, set new node as the root
+
+  // Função para inserir um Nó na Árvore recebe um valor em número e uma String Nome:
+  // - Se a Árvore estiver vazia automaticamente o nó inserido se tornará a Raíz;
+  // - Se já existir uma Raíz a função "insertNode" será chamada passando a Raíz e o novo Nó inserido como parâmetros.
+  insert(value: number, name: string) {
+    let newNode = new BstNode(value, name);
+
     if (!this.root) {
       this.root = newNode;
     } else {
@@ -33,9 +42,15 @@ class BST {
     }
   }
 
+  // Método para inserir um Nó filho na Árvore:
+  // - Verifica se o valor do novo Nó é menor que o da raíz e, se for menor e
+  // a raíz não possuir um Nó filho na esquerda, a novo Nó será colocado como o nó filho na esquerda,
+  // se já houver um Nó filho na esquerda o método "insertNode" será executada novamente passando esse Nó da esquerda e o novo Nó como parâmetro.
+  // - Se o valor do novo Nó for maior que o da Raíz e não houver um Nó filho na direita o novo Nó será inserido na direta,
+  // se já houver um Nó filho na direita o método "insertNode" será executada novamente passando esse Nó da direita e o novo Nó como parâmetro.
+
   insertNode(root: BstNode, newNode: BstNode) {
     if (newNode.value < root.value) {
-      // If no left child, then just insesrt to the left
       if (root.left === null) {
         root.left = newNode;
         return;
@@ -43,7 +58,6 @@ class BST {
         this.insertNode(root.left, newNode);
       }
     } else {
-      // If no right child, then just insesrt to the right
       if (root.right === null) {
         root.right = newNode;
         return;
@@ -53,6 +67,9 @@ class BST {
     }
   }
 
+  // Método de busca:
+  // Se a raíz estiver vazia, ou seja se a árvore não tiver nada inserido nela, retorna que está vazia.
+  // Se não, executa o método "searchNode" passando a Raíz e o valor inserido como parâmetro.
   search(value: number): boolean | string {
     if (!this.root) {
       return "Tree is empty";
@@ -61,6 +78,7 @@ class BST {
     }
   }
 
+  // Método de Busca de Nó:
   searchNode(root: BstNode, value: number): boolean {
     if (!root) {
       return false;
@@ -134,25 +152,23 @@ class BST {
 }
 
 //　for checking result
-const inputs: [string, number?][] = [
-  ["insert", 8],
-  ["find", 8],
-  ["insert", 2],
-  ["insert", 3],
-  ["insert", 7],
-  ["insert", 22],
-  ["insert", 1],
-  ["find", 1],
-  ["find", 2],
-  ["find", 3],
-  ["find", 4],
-  ["find", 5],
+const inputs: [string, number?, string?][] = [
+  ["insert", 50, 'Mundial'],
+  ["insert", 100, 'Champions League'],
+  ["insert", 40, 'Libertadores'],
+  ["insert", 70, 'Europa League'],
+  ["insert", 60, 'La Liga'],
+  ["insert", 30, 'Copa do Brasil'],
+  ["insert", 25, 'Brasileirão'],
+  ["find", 100],
+  ["find", 120],
+  ["find", 80],
+  ["find", 90],
+  ["find", 90],
   ["find", 6],
-  ["find", 7],
-  ["find", 8],
+  ["find", 70],
+  ["find", 800],
   ["print"],
-  ["delete", 3],
-  ["delete", 7],
   ["print"]
 ];
 const bst = new BST();
@@ -160,9 +176,10 @@ const bst = new BST();
 inputs.forEach(input => {
   const type = input[0];
   const num  = input[1] as number;
+  const name = input[2] as string;
 
   if (type === "insert") {
-    bst.insert(num);
+    bst.insert(num, name);
   } else if (type === "delete") {
     bst.remove(num);
   } else if (type === "find") {
@@ -173,30 +190,30 @@ inputs.forEach(input => {
     }
   } else if (type === "print") {
     console.log("----------- in order -----------");
-    inOrder(bst.root!);
+    inOrder(bst.root!, "-");
 
     console.log("----------- pre order -----------");
-    preOrder(bst.root!);
+    preOrder(bst.root!, "-");
   }
 });
 
 
-function preOrder(root: BstNode): void {
-  console.log(root.value);
+function preOrder(root: BstNode, nivel: string): void {
+  console.log(nivel+" "+root.name);
   if (root.left) {
-    preOrder(root.left);
+    preOrder(root.left, nivel+"-");
   }
   if (root.right) {
-    preOrder(root.right);
+    preOrder(root.right, nivel+"-");
   }
 }
 
-function inOrder(root: BstNode): void {
+function inOrder(root: BstNode, nivel: string): void {
   if (root.left) {
-    inOrder(root.left);
+    inOrder(root.left, nivel+"-");
   }
-  console.log(root.value);
+  console.log(nivel+" "+root.name);
   if (root.right) {
-    inOrder(root.right);
+    inOrder(root.right, nivel+"-");
   }
 }
